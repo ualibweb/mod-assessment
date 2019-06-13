@@ -1,0 +1,13 @@
+{
+  "id": "mod-assessment-1.0.0",
+  "name": "Assessment Module",
+  "provides": [
+    {
+      "id": "assessment",
+      "version": "1.0.0"
+    }
+  ],
+  "launchDescriptor": {
+    "dockerImage": "ua/mod-assessment"
+  }
+}
