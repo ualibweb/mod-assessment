@@ -1,0 +1,24 @@
+#%RAML 1.0
+---
+title: Assessment
+version: v1
+
+types:
+  institution: !include schemas/institution.schema.json
+
+/assessment:
+  /location-units:
+    /institutions:
+      description: Collection of institutions
+      get:
+        description: Get a list of institutions
+        responses:
+          200:
+            body:
+              application/json:
+                type: institution
+                example: !include examples/institutions.example.json
+          500:
+            body:
+              text/plain:
+                example: Internal Server Error

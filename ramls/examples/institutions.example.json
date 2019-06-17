@@ -1,0 +1,17 @@
+[
+  {
+    "id": "987751cb-0b55-4fa6-83a3-c198a2ba0507",
+    "name": "The University of Alaska Fairbanks",
+    "code": "UAF"
+  },
+  {
+    "id": "02094d42-72bc-467c-ba0c-b0586ddedf61",
+    "name": "The University of Alaska Anchorage",
+    "code": "UAA"
+  },
+  {
+    "id": "02094d42-72bc-467c-ba0c-b0586ddedf61",
+    "name": "The University of Alaska Southeast",
+    "code": "UAS"
+  }
+]
