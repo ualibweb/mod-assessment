@@ -1,27 +1,56 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+executors:
+  executor:
     docker:
       - image: circleci/node:10
-
     working_directory: ~/repo
-
+commands:
+  install-dependencies:
+    description: "Download and cache dependencies"
     steps:
-      - checkout
-
-      # Download and cache dependencies.
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-            # Fallback to using the latest cache if no exact match is found.
             - v1-dependencies-
-
       - run: npm install
-
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      # Run tests.
+jobs:
+  build:
+    executor: executor
+    steps:
+      - checkout
+      - install-dependencies
+      - run: npm run build
+  test:
+    executor: executor
+    steps:
+      - checkout
+      - install-dependencies
       - run: npm test
+  deploy-docs:
+    executor: executor
+    steps:
+      - checkout
+      - install-dependencies
+      - run: |
+          git config user.name "jaredrcleghorn"
+          git config user.email "jrcleghorn@crimson.ua.edu"
+      - add_ssh_keys:
+          fingerprints:
+            - "5d:a2:b5:86:02:cb:cc:35:eb:ef:0f:2d:a2:0a:fb:fb"
+      - run: npm run deploy-docs
+workflows:
+  workflow:
+    jobs:
+      - build
+      - test
+      - deploy-docs:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: master
