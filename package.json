@@ -9,7 +9,7 @@
     "curl": "curl -w '\\n' -D -",
     "curl-delete": "npm run curl -- -X DELETE",
     "curl-post": "npm run curl -- -H \"Content-type: application/json\" -d",
-    "deploy-docs": "npm run generate-docs && gh-pages --dist docs",
+    "deploy-docs": "npm run generate-docs && gh-pages --dist docs --message \"[skip ci] Updates\"",
     "docker-build": "npm run build && docker build -t ua/$npm_package_name .",
     "docker-run": "docker run -p 8080:8080 ua/$npm_package_name",
     "generate-docs": "npm run clean && mkdir docs && raml2html ramls/assessment-api.raml > docs/index.html",
