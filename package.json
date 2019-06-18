@@ -1,7 +1,7 @@
 {
   "name": "mod-assessment",
   "version": "1.0.0",
-  "description": "a back end FOLIO module for assessment",
+  "description": "a back-end FOLIO module for assessment",
   "main": "./dist/index.js",
   "scripts": {
     "build": "npm run clean && babel src -x \".js,.ts\" --out-dir dist",
