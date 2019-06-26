@@ -10,6 +10,7 @@
     "curl-delete": "npm run curl -- -X DELETE",
     "curl-post": "npm run curl -- -H \"Content-type: application/json\" -d",
     "deploy-docs": "npm run generate-docs && gh-pages --dist docs --message \"[skip ci] Updates\"",
+    "develop": "nodemon -e js,ts --exec \"npm run build && npm run start\" --legacy-watch --watch src",
     "docker-build": "npm run build && docker build -t ua/$npm_package_name .",
     "docker-run": "docker run -p 8080:8080 ua/$npm_package_name",
     "generate-docs": "npm run clean && mkdir docs && raml2html ramls/assessment-api.raml > docs/index.html",
@@ -41,6 +42,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
     "gh-pages": "^2.0.1",
+    "nodemon": "^1.19.1",
     "raml2html": "^7.4.0",
     "rimraf": "^2.6.3",
     "typescript": "^3.5.1"
