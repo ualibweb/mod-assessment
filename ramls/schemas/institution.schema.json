@@ -11,10 +11,6 @@
     "name": {
       "description": "The name of the institution",
       "type": "string"
-    },
-    "code": {
-      "description": "The distinct code for the institution",
-      "type": "string"
     }
   },
   "additionalProperties": false,
