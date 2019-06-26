@@ -1,0 +1,54 @@
+[
+  {
+      "id": "04f3a21f-c4c9-46a7-b99c-e69aa97bfdba",
+      "name": "University of Alaska Fairbanks (Fairbanks Campus)"
+  },
+  {
+      "id": "119870bb-49ba-4a20-b5b3-1e8e5c01164c",
+      "name": "Bristol Bay Campus"
+  },
+  {
+      "id": "ded270de-de4f-471b-881c-1fbcf46e4ff0",
+      "name": "Chukchi Campus"
+  },
+  {
+      "id": "1f3fa17f-3165-4f37-8bb5-8b1021711bb2",
+      "name": "Community and Technical College"
+  },
+  {
+      "id": "8fa301cf-59ca-4e5d-baca-6d0e37f49895",
+      "name": "Interior Alaska Campus"
+  },
+  {
+      "id": "7bafeffb-b714-4292-a418-fe7c9685ab66",
+      "name": "Kuskokwim Campus"
+  },
+  {
+      "id": "523d17d2-9b41-4ea1-b91b-c749bc55ba42",
+      "name": "Northwest Campus"
+  },
+  {
+      "id": "d011e140-b433-4f92-917c-4e6c51fecf3c",
+      "name": "University of Alaska Anchorage (Anchorage Campus)"
+  },
+  {
+      "id": "dddcb839-ff10-4ed8-9575-0faa01f39a2a",
+      "name": "Kenai Peninsula College (Kenai River Campus)"
+  },
+  {
+      "id": "c57b823c-796f-4663-830c-bd45466c246f",
+      "name": "Kenai Peninsula College (Kachemak Bay Campus)"
+  },
+  {
+      "id": "c6d206c3-bc0a-410f-b492-6985e18a9f2b",
+      "name": "Kodiak College"
+  },
+  {
+      "id": "b2d2a0dc-9f25-449d-9012-c9a4b226e702",
+      "name": "Mat-Su College"
+  },
+  {
+      "id": "f098a9c1-0021-476e-ae1c-0d57a92cae64",
+      "name": "Prince William Sound College"
+  }
+]

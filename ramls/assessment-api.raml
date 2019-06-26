@@ -5,20 +5,46 @@ version: v1
 
 types:
   institution: !include schemas/institution.schema.json
+  campus: !include schemas/campus.schema.json
+
+resourceTypes:
+  collection:
+    description: Collection of <<resourcePathName>>
+    get:
+      description: Get a list of <<resourcePathName>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<resourcePathName|!singularize>>[]
+              example: <<exampleCollection>>
+        500:
+          body:
+            text/plain:
+              example: Internal Server Error
+  subCollection:
+    type:
+      collection:
+        exampleCollection: <<exampleCollection>>
+    get:
+      description: Get a list of <<resourcePathName>> based on a list of <<parentCollection|!singularize>> IDs
 
 /assessment:
   /location-units:
     /institutions:
-      description: Collection of institutions
+      type:
+        collection:
+          exampleCollection: !include examples/institutions.example.json
+    /campuses:
+      type:
+        subCollection:
+          parentCollection: institutions
+          exampleCollection: !include examples/campuses.example.json
       get:
-        description: Get a list of institutions
-        responses:
-          200:
-            body:
-              application/json:
-                type: institution
-                example: !include examples/institutions.example.json
-          500:
-            body:
-              text/plain:
-                example: Internal Server Error
+        queryParameters:
+          institutionIds:
+            displayName: Institution IDs
+            type: string
+            description: Serialized JSON array of institution IDs
+            example: ["987751cb-0b55-4fa6-83a3-c198a2ba0507","02094d42-72bc-467c-ba0c-b0586ddedf61"]
+            required: true
