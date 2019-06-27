@@ -1,13 +1,16 @@
 import express from 'express';
 import { Client } from 'pg';
 import locationUnits from './routers/location-units';
+import QueryParameterError from './query-parameter-error';
 import config from './config';
 
 const app: express.Application = express();
 
 app.use('/assessment/location-units', locationUnits);
 app.use((error: Error, request: express.Request, response: express.Response, next: Function) => {
-  response.sendStatus(500);
+  if (error instanceof QueryParameterError) response.sendStatus(400);
+  else response.sendStatus(500);
+
   console.error(error.stack);
 });
 

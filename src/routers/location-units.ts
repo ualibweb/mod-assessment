@@ -1,6 +1,7 @@
 import express from 'express';
 import pg from 'pg';
 import validator from 'validator';
+import QueryParameterError from '../query-parameter-error';
 
 const router = express.Router();
 
@@ -11,25 +12,22 @@ router.get('/institutions', (request: express.Request, response: express.Respons
 });
 
 router.get('/campuses', (request: express.Request, response: express.Response, next: express.NextFunction) => {
-  let institutionIds = request.query.institutionIds;
-
-  if (institutionIds === undefined) {
-    response.status(400).send('Missing query parameter');
-    return;
-  }
-
-  // Validate the institution IDs.
   try {
-    institutionIds = JSON.parse(institutionIds);
-    for (let institutionId of institutionIds) if (!validator.isUUID(institutionId, 4)) throw new Error();
-  } catch {
-    response.status(400).send('Invalid query parameter');
-    return;
-  }
+    const serializedInstitutionIds: string = request.query.institutionIds;
 
-  request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId IN (${institutionIds.map((id: string) => `'${id}'`).toString()})`)
-    .then((result: pg.QueryResult) => { response.json(result.rows); })
-    .catch((error: Error) => { next(error); });
+    // Check for institution IDs.
+    if (serializedInstitutionIds === undefined) throw new Error();
+
+    // Validate the institution IDs.
+    const institutionIds: Array<string> = JSON.parse(serializedInstitutionIds);
+    institutionIds.forEach((id: string) => { if (!validator.isUUID(id, 4)) throw new Error(); });
+
+    request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId IN (${institutionIds.map((id: string) => `'${id}'`).toString()})`)
+      .then((result: pg.QueryResult) => { response.json(result.rows); })
+      .catch((error: Error) => { next(error); });
+  } catch {
+    next(new QueryParameterError());
+  }
 });
 
 export default router;
