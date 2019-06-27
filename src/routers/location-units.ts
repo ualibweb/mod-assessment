@@ -1,15 +1,16 @@
 import express from 'express';
+import pg from 'pg';
 import validator from 'validator';
 
 const router = express.Router();
 
-router.get('/institutions', (request: express.Request, response: express.Response, next) => {
+router.get('/institutions', (request: express.Request, response: express.Response, next: express.NextFunction) => {
   request.app.locals.client.query(`SELECT * FROM institutions`)
-    .then(result => { response.json(result.rows); })
-    .catch(error => { next(error); });
+    .then((result: pg.QueryResult) => { response.json(result.rows); })
+    .catch((error: Error) => { next(error); });
 });
 
-router.get('/campuses', (request: express.Request, response: express.Response, next) => {
+router.get('/campuses', (request: express.Request, response: express.Response, next: express.NextFunction) => {
   let institutionIds = request.query.institutionIds;
 
   if (institutionIds === undefined) {
@@ -27,8 +28,8 @@ router.get('/campuses', (request: express.Request, response: express.Response, n
   }
 
   request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId IN (${institutionIds.map((id: string) => `'${id}'`).toString()})`)
-    .then(result => { response.json(result.rows); })
-    .catch(error => { next(error); });
+    .then((result: pg.QueryResult) => { response.json(result.rows); })
+    .catch((error: Error) => { next(error); });
 });
 
 export default router;
