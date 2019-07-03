@@ -170,75 +170,88 @@ pre code {
 .required {
   color: #f00;
 }
-    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Assessment API documentation <small>version v1</small></h1><p></p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="assessment" class="panel-title">/assessment</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_assessment_location_units_institutions"><span class="parent">/assessment/location-units</span>/institutions</a> <span class="methods"><a href="#assessment_location_units_institutions_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_assessment_location_units_institutions" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Collection of institutions</p></div><div class="list-group"><div onclick="window.location.href = '#assessment_location_units_institutions_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of institutions</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="assessment_location_units_institutions_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/assessment/location-units</span>/institutions</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of institutions</p></div><ul class="nav nav-tabs"><li class="active"><a href="#assessment_location_units_institutions_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="assessment_location_units_institutions_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Assessment API documentation <small>version v1</small></h1><p></p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="assessment" class="panel-title">/assessment</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_assessment_location_units"><span class="parent">/assessment</span>/location-units</a> <span class="methods"><a href="#assessment_location_units_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_assessment_location_units" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Collection of nested location units</p></div><div class="list-group"><div onclick="window.location.href = '#assessment_location_units_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of nested location units</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="assessment_location_units_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/assessment</span>/location-units</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of nested location units</p></div><ul class="nav nav-tabs"><li class="active"><a href="#assessment_location_units_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="assessment_location_units_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
   {
-    "id": "987751cb-0b55-4fa6-83a3-c198a2ba0507",
-    "name": "The University of Alaska Fairbanks"
+    "id": "2c1bdd43-f51e-4fd9-8e4d-8418251b64c7",
+    "name": "University of Alaska Fairbanks",
+    "campuses": [
+      {
+        "id": "30dc9ac2-c819-4aa7-a020-90723daa9d6c",
+        "name": "University of Alaska Fairbanks (Fairbanks Campus)"
+      },
+      {
+        "id": "3e645761-3daa-4830-88cf-477f6ed43036",
+        "name": "Bristol Bay Campus"
+      },
+      {
+        "id": "5b2a32c7-4377-403e-a5a3-cc2535949f47",
+        "name": "Chukchi Campus"
+      },
+      {
+        "id": "1c5d9c58-b37d-4d2f-b4a6-735933446528",
+        "name": "Community and Technical College"
+      },
+      {
+        "id": "d37187c6-eaf9-49d8-9811-283192ed6946",
+        "name": "Interior Alaska Campus"
+      },
+      {
+        "id": "295da8ae-b672-4e0f-b10c-e4cfd8ec6d52",
+        "name": "Kuskokwim Campus"
+      },
+      {
+        "id": "ce213c28-477e-4fcb-ba65-69822dbf1f0d",
+        "name": "Northwest Campus"
+      }
+    ]
   },
   {
-    "id": "02094d42-72bc-467c-ba0c-b0586ddedf61",
-    "name": "The University of Alaska Anchorage"
+    "id": "d26f3e56-ba19-4f82-ad73-560a822299ef",
+    "name": "University of Alaska Anchorage",
+    "campuses": [
+      {
+        "id": "99e30164-fa8c-454e-85e2-db60e5dced2f",
+        "name": "University of Alaska Anchorage (Anchorage Campus)"
+      },
+      {
+        "id": "1a611ed0-5b64-4d28-8ea9-f36b8576ff53",
+        "name": "Kenai Peninsula College (Kenai River Campus)"
+      },
+      {
+        "id": "1ccc5025-44eb-4091-8bff-20abaa2a9ba6",
+        "name": "Kenai Peninsula College (Kachemak Bay Campus)"
+      },
+      {
+        "id": "f1758f97-61a1-4e8e-96ef-d1a28fdeb72f",
+        "name": "Kodiak College"
+      },
+      {
+        "id": "87f68e5d-9043-4656-88d9-b76a2b817a0e",
+        "name": "Mat-Su College"
+      },
+      {
+        "id": "98a940a3-b972-4272-9ce1-e991d3a8a13e",
+        "name": "Prince William Sound College"
+      }
+    ]
   },
   {
-    "id": "02094d42-72bc-467c-ba0c-b0586ddedf61",
-    "name": "The University of Alaska Southeast"
-  }
-]
-</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: text/plain</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Internal Server Error</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_assessment_location_units_campuses"><span class="parent">/assessment/location-units</span>/campuses</a> <span class="methods"><a href="#assessment_location_units_campuses_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_assessment_location_units_campuses" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Collection of campuses</p></div><div class="list-group"><div onclick="window.location.href = '#assessment_location_units_campuses_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of campuses based on a list of institution IDs</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="assessment_location_units_campuses_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/assessment/location-units</span>/campuses</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of campuses based on a list of institution IDs</p></div><ul class="nav nav-tabs"><li class="active"><a href="#assessment_location_units_campuses_get_request" data-toggle="tab">Request</a></li><li><a href="#assessment_location_units_campuses_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="assessment_location_units_campuses_get_request"><h3>Query Parameters</h3><ul><li><strong>institutionIds</strong>: <em><span class="required">required</span>(string)</em><p>Serialized JSON array of institution IDs</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
-  "987751cb-0b55-4fa6-83a3-c198a2ba0507",
-  "02094d42-72bc-467c-ba0c-b0586ddedf61"
-]</code></pre></div></li></ul></div><div class="tab-pane" id="assessment_location_units_campuses_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
-  {
-      "id": "04f3a21f-c4c9-46a7-b99c-e69aa97bfdba",
-      "name": "University of Alaska Fairbanks (Fairbanks Campus)"
-  },
-  {
-      "id": "119870bb-49ba-4a20-b5b3-1e8e5c01164c",
-      "name": "Bristol Bay Campus"
-  },
-  {
-      "id": "ded270de-de4f-471b-881c-1fbcf46e4ff0",
-      "name": "Chukchi Campus"
-  },
-  {
-      "id": "1f3fa17f-3165-4f37-8bb5-8b1021711bb2",
-      "name": "Community and Technical College"
-  },
-  {
-      "id": "8fa301cf-59ca-4e5d-baca-6d0e37f49895",
-      "name": "Interior Alaska Campus"
-  },
-  {
-      "id": "7bafeffb-b714-4292-a418-fe7c9685ab66",
-      "name": "Kuskokwim Campus"
-  },
-  {
-      "id": "523d17d2-9b41-4ea1-b91b-c749bc55ba42",
-      "name": "Northwest Campus"
-  },
-  {
-      "id": "d011e140-b433-4f92-917c-4e6c51fecf3c",
-      "name": "University of Alaska Anchorage (Anchorage Campus)"
-  },
-  {
-      "id": "dddcb839-ff10-4ed8-9575-0faa01f39a2a",
-      "name": "Kenai Peninsula College (Kenai River Campus)"
-  },
-  {
-      "id": "c57b823c-796f-4663-830c-bd45466c246f",
-      "name": "Kenai Peninsula College (Kachemak Bay Campus)"
-  },
-  {
-      "id": "c6d206c3-bc0a-410f-b492-6985e18a9f2b",
-      "name": "Kodiak College"
-  },
-  {
-      "id": "b2d2a0dc-9f25-449d-9012-c9a4b226e702",
-      "name": "Mat-Su College"
-  },
-  {
-      "id": "f098a9c1-0021-476e-ae1c-0d57a92cae64",
-      "name": "Prince William Sound College"
+    "id": "94623c99-6c53-4dcd-85f6-854fb6ae9290",
+    "name": "University of Alaska Southeast",
+    "campuses": [
+      {
+        "id": "42ea7f79-cfa7-4ff2-a809-67ff66290792",
+        "name": "University of Alaska Southeast (Juneau Campus)"
+      },
+      {
+        "id": "d442e5c1-ed06-42be-a065-b8edc272e338",
+        "name": "Ketchikan Campus"
+      },
+      {
+        "id": "34e86395-86e6-4100-9c49-d82ae54c35ab",
+        "name": "Sitka Campus"
+      }
+    ]
   }
 ]
 </code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: text/plain</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Internal Server Error</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#assessment">/assessment</a></li></ul></div></div></div></div></body></html>
