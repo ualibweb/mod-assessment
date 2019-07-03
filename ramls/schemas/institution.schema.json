@@ -3,16 +3,20 @@
   "title": "Institution",
   "description": "An institution, the first-level location unit",
   "type": "object",
+  "allOf": [
+    {
+      "$ref": "location-unit.schema.json"
+    }
+  ],
   "properties": {
-    "id": {
-      "description": "The unique identifier for the institution",
-      "type": "string"
-    },
-    "name": {
-      "description": "The name of the institution",
-      "type": "string"
+    "campuses": {
+      "description": "A list of the campuses under the institution",
+      "type": "array",
+      "items": {
+        "$ref": "campuses.schema.json"
+      }
     }
   },
   "additionalProperties": false,
-  "required": [ "name" ]
+  "required": [ "campuses" ]
 }

@@ -3,16 +3,10 @@
   "title": "Campus",
   "description": "A campus, the second-level location unit",
   "type": "object",
-  "properties": {
-    "id": {
-      "description": "The unique identifier for the campus",
-      "type": "string"
-    },
-    "name": {
-      "description": "The name of the campus",
-      "type": "string"
+  "allOf": [
+    {
+      "$ref": "location-unit.schema.json"
     }
-  },
-  "additionalProperties": false,
-  "required": [ "name" ]
+  ],
+  "additionalProperties": false
 }

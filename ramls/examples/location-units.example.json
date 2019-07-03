@@ -1,0 +1,84 @@
+[
+  {
+    "id": "2c1bdd43-f51e-4fd9-8e4d-8418251b64c7",
+    "name": "University of Alaska Fairbanks",
+    "campuses": [
+      {
+        "id": "30dc9ac2-c819-4aa7-a020-90723daa9d6c",
+        "name": "University of Alaska Fairbanks (Fairbanks Campus)"
+      },
+      {
+        "id": "3e645761-3daa-4830-88cf-477f6ed43036",
+        "name": "Bristol Bay Campus"
+      },
+      {
+        "id": "5b2a32c7-4377-403e-a5a3-cc2535949f47",
+        "name": "Chukchi Campus"
+      },
+      {
+        "id": "1c5d9c58-b37d-4d2f-b4a6-735933446528",
+        "name": "Community and Technical College"
+      },
+      {
+        "id": "d37187c6-eaf9-49d8-9811-283192ed6946",
+        "name": "Interior Alaska Campus"
+      },
+      {
+        "id": "295da8ae-b672-4e0f-b10c-e4cfd8ec6d52",
+        "name": "Kuskokwim Campus"
+      },
+      {
+        "id": "ce213c28-477e-4fcb-ba65-69822dbf1f0d",
+        "name": "Northwest Campus"
+      }
+    ]
+  },
+  {
+    "id": "d26f3e56-ba19-4f82-ad73-560a822299ef",
+    "name": "University of Alaska Anchorage",
+    "campuses": [
+      {
+        "id": "99e30164-fa8c-454e-85e2-db60e5dced2f",
+        "name": "University of Alaska Anchorage (Anchorage Campus)"
+      },
+      {
+        "id": "1a611ed0-5b64-4d28-8ea9-f36b8576ff53",
+        "name": "Kenai Peninsula College (Kenai River Campus)"
+      },
+      {
+        "id": "1ccc5025-44eb-4091-8bff-20abaa2a9ba6",
+        "name": "Kenai Peninsula College (Kachemak Bay Campus)"
+      },
+      {
+        "id": "f1758f97-61a1-4e8e-96ef-d1a28fdeb72f",
+        "name": "Kodiak College"
+      },
+      {
+        "id": "87f68e5d-9043-4656-88d9-b76a2b817a0e",
+        "name": "Mat-Su College"
+      },
+      {
+        "id": "98a940a3-b972-4272-9ce1-e991d3a8a13e",
+        "name": "Prince William Sound College"
+      }
+    ]
+  },
+  {
+    "id": "94623c99-6c53-4dcd-85f6-854fb6ae9290",
+    "name": "University of Alaska Southeast",
+    "campuses": [
+      {
+        "id": "42ea7f79-cfa7-4ff2-a809-67ff66290792",
+        "name": "University of Alaska Southeast (Juneau Campus)"
+      },
+      {
+        "id": "d442e5c1-ed06-42be-a065-b8edc272e338",
+        "name": "Ketchikan Campus"
+      },
+      {
+        "id": "34e86395-86e6-4100-9c49-d82ae54c35ab",
+        "name": "Sitka Campus"
+      }
+    ]
+  }
+]

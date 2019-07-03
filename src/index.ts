@@ -1,16 +1,32 @@
 import express from 'express';
-import { Client } from 'pg';
-import locationUnits from './routers/location-units';
-import QueryParameterError from './query-parameter-error';
+import pg, { Client } from 'pg';
 import config from './config';
 
 const app: express.Application = express();
 
-app.use('/assessment/location-units', locationUnits);
-app.use((error: Error, request: express.Request, response: express.Response, next: Function) => {
-  if (error instanceof QueryParameterError) response.sendStatus(400);
-  else response.sendStatus(500);
+app.get('/assessment/location-units', (request: express.Request, response: express.Response, next: express.NextFunction) => {
+  request.app.locals.client.query(`SELECT * FROM institutions`)
+    .then((result: pg.QueryResult) => {
+      const promises: Array<Promise<any>> = [];
 
+      result.rows.forEach((row: any) => {
+        promises.push(new Promise((resolve: Function, reject: Function) => {
+          request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId = '${row.id}'`)
+            .then((result: pg.QueryResult) => {
+              row.campuses = result.rows;
+              resolve(row);
+            }).catch((error: Error) => { reject(error); })
+        }));
+      });
+
+      return Promise.all(promises);
+    }).then((rows: Array<any>) => { response.json(rows); })
+    .catch((error: Error) => { next(error); });
+});
+
+// Error handler.
+app.use((error: Error, request: express.Request, response: express.Response, next: Function) => {
+  response.sendStatus(500);
   console.error(error.stack);
 });
 

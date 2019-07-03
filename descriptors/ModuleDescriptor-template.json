@@ -8,11 +8,7 @@
       "handlers": [
         {
           "methods": ["GET"],
-          "pathPattern": "/assessment/location-units/institutions"
-        },
-        {
-          "methods": ["GET"],
-          "pathPattern": "/assessment/location-units/campuses"
+          "pathPattern": "/assessment/location-units"
         }
       ]
     }
