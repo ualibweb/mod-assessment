@@ -8,5 +8,15 @@
       "$ref": "location-unit.schema.json"
     }
   ],
-  "additionalProperties": false
+  "properties": {
+    "libraries": {
+      "description": "A list of the libraries under the campus",
+      "type": "array",
+      "items": {
+        "$ref": "library.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [ "libraries" ]
 }

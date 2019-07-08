@@ -7,20 +7,34 @@ const app: express.Application = express();
 app.get('/assessment/location-units', (request: express.Request, response: express.Response, next: express.NextFunction) => {
   request.app.locals.client.query(`SELECT * FROM institutions`)
     .then((result: pg.QueryResult) => {
-      const promises: Array<Promise<any>> = [];
+      const institutions: Array<Promise<any>> = [];
 
-      result.rows.forEach((row: any) => {
-        promises.push(new Promise((resolve: Function, reject: Function) => {
-          request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId = '${row.id}'`)
+      result.rows.forEach((institution: any) => {
+        institutions.push(new Promise((resolve: Function, reject: Function) => {
+          request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId = '${institution.id}'`)
             .then((result: pg.QueryResult) => {
-              row.campuses = result.rows;
-              resolve(row);
+              const campuses: Array<Promise<any>> = [];
+
+              result.rows.forEach((campus: any) => {
+                campuses.push(new Promise((resolve: Function, reject: Function) => {
+                  request.app.locals.client.query(`SELECT id, name FROM libraries WHERE campusId = '${campus.id}'`)
+                    .then((result: pg.QueryResult) => {
+                      campus.libraries = result.rows;
+                      resolve(campus);
+                    }).catch((error: Error) => { reject(error); });
+                }));
+              });
+
+              return Promise.all(campuses);
+            }).then((campuses: Array<any>) => {
+              institution.campuses = campuses;
+              resolve(institution);
             }).catch((error: Error) => { reject(error); })
         }));
       });
 
-      return Promise.all(promises);
-    }).then((rows: Array<any>) => { response.json(rows); })
+      return Promise.all(institutions);
+    }).then((institutions: Array<any>) => { response.json(institutions); })
     .catch((error: Error) => { next(error); });
 });
 
