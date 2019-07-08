@@ -172,86 +172,86 @@ pre code {
 }
     </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Assessment API documentation <small>version v1</small></h1><p></p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="assessment" class="panel-title">/assessment</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_assessment_location_units"><span class="parent">/assessment</span>/location-units</a> <span class="methods"><a href="#assessment_location_units_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_assessment_location_units" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Collection of nested location units</p></div><div class="list-group"><div onclick="window.location.href = '#assessment_location_units_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of nested location units</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="assessment_location_units_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/assessment</span>/location-units</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of nested location units</p></div><ul class="nav nav-tabs"><li class="active"><a href="#assessment_location_units_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="assessment_location_units_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
   {
-    "id": "2c1bdd43-f51e-4fd9-8e4d-8418251b64c7",
-    "name": "University of Alaska Fairbanks",
-    "campuses": [
-      {
-        "id": "30dc9ac2-c819-4aa7-a020-90723daa9d6c",
-        "name": "University of Alaska Fairbanks (Fairbanks Campus)"
-      },
-      {
-        "id": "3e645761-3daa-4830-88cf-477f6ed43036",
-        "name": "Bristol Bay Campus"
-      },
-      {
-        "id": "5b2a32c7-4377-403e-a5a3-cc2535949f47",
-        "name": "Chukchi Campus"
-      },
-      {
-        "id": "1c5d9c58-b37d-4d2f-b4a6-735933446528",
-        "name": "Community and Technical College"
-      },
-      {
-        "id": "d37187c6-eaf9-49d8-9811-283192ed6946",
-        "name": "Interior Alaska Campus"
-      },
-      {
-        "id": "295da8ae-b672-4e0f-b10c-e4cfd8ec6d52",
-        "name": "Kuskokwim Campus"
-      },
-      {
-        "id": "ce213c28-477e-4fcb-ba65-69822dbf1f0d",
-        "name": "Northwest Campus"
-      }
-    ]
+      "id": "7625532a-a187-47d9-8ff0-47820f8e3ebe",
+      "name": "University of Alaska Fairbanks",
+      "campuses": [
+          {
+              "id": "34fedfd2-8aca-4163-a3f7-4f472a173069",
+              "name": "University of Alaska Fairbanks (Fairbanks Campus)",
+              "libraries": [
+                  {
+                      "id": "c5696343-b966-4a6a-a040-18208fec91ef",
+                      "name": "Elmer E. Rasmuson Library"
+                  },
+                  {
+                      "id": "936218ef-44b7-40bc-9cb3-38bca758fcd5",
+                      "name": "Keith B. Mather Library"
+                  }
+              ]
+          }
+      ]
   },
   {
-    "id": "d26f3e56-ba19-4f82-ad73-560a822299ef",
-    "name": "University of Alaska Anchorage",
-    "campuses": [
-      {
-        "id": "99e30164-fa8c-454e-85e2-db60e5dced2f",
-        "name": "University of Alaska Anchorage (Anchorage Campus)"
-      },
-      {
-        "id": "1a611ed0-5b64-4d28-8ea9-f36b8576ff53",
-        "name": "Kenai Peninsula College (Kenai River Campus)"
-      },
-      {
-        "id": "1ccc5025-44eb-4091-8bff-20abaa2a9ba6",
-        "name": "Kenai Peninsula College (Kachemak Bay Campus)"
-      },
-      {
-        "id": "f1758f97-61a1-4e8e-96ef-d1a28fdeb72f",
-        "name": "Kodiak College"
-      },
-      {
-        "id": "87f68e5d-9043-4656-88d9-b76a2b817a0e",
-        "name": "Mat-Su College"
-      },
-      {
-        "id": "98a940a3-b972-4272-9ce1-e991d3a8a13e",
-        "name": "Prince William Sound College"
-      }
-    ]
+      "id": "a26440c1-828e-47eb-b8e8-29aec16d35a6",
+      "name": "University of Alaska Anchorage",
+      "campuses": [
+          {
+              "id": "cb5affaf-ed94-40ab-83e9-307ad995fc45",
+              "name": "University of Alaska Anchorage (Anchorage Campus)",
+              "libraries": [
+                  {
+                      "id": "85937993-7b2a-46a5-9029-cbef362d8fa1",
+                      "name": "UAA/APU Consortium Library"
+                  }
+              ]
+          },
+          {
+              "id": "5188dca3-3557-46d8-a74f-e6335fe22cbd",
+              "name": "Kodiak College",
+              "libraries": [
+                  {
+                      "id": "ce7b9b20-2828-4590-bac8-17aa591e1761",
+                      "name": "Carolyn Floyd Library"
+                  }
+              ]
+          },
+          {
+              "id": "dad24c72-30e2-4e85-9f27-d0c17aba623b",
+              "name": "Mat-Su College",
+              "libraries": [
+                  {
+                      "id": "58de1633-ea66-411d-9519-679b00104245",
+                      "name": "Alvin S. Okeson Library"
+                  }
+              ]
+          }
+      ]
   },
   {
-    "id": "94623c99-6c53-4dcd-85f6-854fb6ae9290",
-    "name": "University of Alaska Southeast",
-    "campuses": [
-      {
-        "id": "42ea7f79-cfa7-4ff2-a809-67ff66290792",
-        "name": "University of Alaska Southeast (Juneau Campus)"
-      },
-      {
-        "id": "d442e5c1-ed06-42be-a065-b8edc272e338",
-        "name": "Ketchikan Campus"
-      },
-      {
-        "id": "34e86395-86e6-4100-9c49-d82ae54c35ab",
-        "name": "Sitka Campus"
-      }
-    ]
+      "id": "eaaa6553-fab5-41d6-a9dc-4ccb5f4408ff",
+      "name": "University of Alaska Southeast",
+      "campuses": [
+          {
+              "id": "6024df15-1a78-4a93-a90b-d38fd33f7b91",
+              "name": "University of Alaska Southeast (Juneau Campus)",
+              "libraries": [
+                  {
+                      "id": "f88aeff1-eafc-4d3a-b452-9edc01cffa02",
+                      "name": "William A. Egan Library"
+                  }
+              ]
+          },
+          {
+              "id": "62d7bee5-6b71-47e6-a86e-40cc9e223c3f",
+              "name": "Ketchikan Campus",
+              "libraries": [
+                  {
+                      "id": "d65d126f-af7c-4675-91bc-6c059444265a",
+                      "name": "Ketchikan Campus Library"
+                  }
+              ]
+          }
+      ]
   }
 ]
 </code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: text/plain</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Internal Server Error</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#assessment">/assessment</a></li></ul></div></div></div></div></body></html>
