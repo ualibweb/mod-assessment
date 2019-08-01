@@ -1,81 +1,25 @@
 [
   {
-      "id": "7625532a-a187-47d9-8ff0-47820f8e3ebe",
-      "name": "University of Alaska Fairbanks",
+      "id": "40ee00ca-a518-4b49-be01-0638d0a4ac57",
+      "name": "Københavns Universitet",
       "campuses": [
           {
-              "id": "34fedfd2-8aca-4163-a3f7-4f472a173069",
-              "name": "University of Alaska Fairbanks (Fairbanks Campus)",
+              "id": "62cf76b7-cca5-4d33-9217-edf42ce1a848",
+              "name": "City Campus",
               "libraries": [
                   {
-                      "id": "c5696343-b966-4a6a-a040-18208fec91ef",
-                      "name": "Elmer E. Rasmuson Library"
-                  },
-                  {
-                      "id": "936218ef-44b7-40bc-9cb3-38bca758fcd5",
-                      "name": "Keith B. Mather Library"
-                  }
-              ]
-          }
-      ]
-  },
-  {
-      "id": "a26440c1-828e-47eb-b8e8-29aec16d35a6",
-      "name": "University of Alaska Anchorage",
-      "campuses": [
-          {
-              "id": "cb5affaf-ed94-40ab-83e9-307ad995fc45",
-              "name": "University of Alaska Anchorage (Anchorage Campus)",
-              "libraries": [
-                  {
-                      "id": "85937993-7b2a-46a5-9029-cbef362d8fa1",
-                      "name": "UAA/APU Consortium Library"
+                      "id": "5d78803e-ca04-4b4a-aeae-2c63b924518b",
+                      "name": "Datalogisk Institut"
                   }
               ]
           },
           {
-              "id": "5188dca3-3557-46d8-a74f-e6335fe22cbd",
-              "name": "Kodiak College",
+              "id": "470ff1dd-937a-4195-bf9e-06bcfcd135df",
+              "name": "Online",
               "libraries": [
                   {
-                      "id": "ce7b9b20-2828-4590-bac8-17aa591e1761",
-                      "name": "Carolyn Floyd Library"
-                  }
-              ]
-          },
-          {
-              "id": "dad24c72-30e2-4e85-9f27-d0c17aba623b",
-              "name": "Mat-Su College",
-              "libraries": [
-                  {
-                      "id": "58de1633-ea66-411d-9519-679b00104245",
-                      "name": "Alvin S. Okeson Library"
-                  }
-              ]
-          }
-      ]
-  },
-  {
-      "id": "eaaa6553-fab5-41d6-a9dc-4ccb5f4408ff",
-      "name": "University of Alaska Southeast",
-      "campuses": [
-          {
-              "id": "6024df15-1a78-4a93-a90b-d38fd33f7b91",
-              "name": "University of Alaska Southeast (Juneau Campus)",
-              "libraries": [
-                  {
-                      "id": "f88aeff1-eafc-4d3a-b452-9edc01cffa02",
-                      "name": "William A. Egan Library"
-                  }
-              ]
-          },
-          {
-              "id": "62d7bee5-6b71-47e6-a86e-40cc9e223c3f",
-              "name": "Ketchikan Campus",
-              "libraries": [
-                  {
-                      "id": "d65d126f-af7c-4675-91bc-6c059444265a",
-                      "name": "Ketchikan Campus Library"
+                      "id": "c2549bb4-19c7-4fcc-8b52-39e612fb7dbe",
+                      "name": "Online"
                   }
               ]
           }
