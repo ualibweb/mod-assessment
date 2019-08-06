@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Main Class",
+  "description": "A main class in the Library of Congress Classification, with counts",
+  "type": "object",
+  "properties": {
+    "letter": {
+      "description": "The letter that designates the main class",
+      "type": "string"
+    },
+    "caption": {
+      "description": "The caption that describes the main class",
+      "type": "string"
+    },
+    "counts": {
+      "description": "The counts of the titles and volumes in the main class, broken down by library",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "required": [ "letter", "caption", "counts" ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "letter": "P",
+    "caption": "Language and Literature",
+    "counts": {
+      "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+        "titles": 1,
+        "volumes": 3
+      }
+    }
+  },
+  {
+    "letter": "R",
+    "caption": "Medicine",
+    "counts": {
+      "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+          "titles": 1,
+          "volumes": 1
+      }
+    }
+  }
+]

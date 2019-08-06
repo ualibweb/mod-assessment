@@ -9,6 +9,10 @@
         {
           "methods": ["GET"],
           "pathPattern": "/assessment/location-units"
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/assessment/collections-by-lcc-number"
         }
       ]
     }

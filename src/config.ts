@@ -2,7 +2,7 @@ export default {
   express: {
     port: 8080
   },
-  pg: {
+  ldp: {
     user: 'ldp',
     password: 'ldp',
     host: '172.17.0.1',

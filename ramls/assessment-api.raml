@@ -5,6 +5,7 @@ version: v1
 
 types:
   institution: !include schemas/institution.schema.json
+  mainClass: !include schemas/main-class.schema.json
 
 /assessment:
   /location-units:
@@ -17,6 +18,20 @@ types:
             application/json:
               type: institution[]
               example: !include examples/location-units.example.json
+        500:
+          body:
+            text/plain:
+              example: Internal Server Error
+  /collections-by-lcc-number:
+    description: Collection of main classes
+    get:
+      description: Get a list of main classes
+      responses:
+        200:
+          body:
+            application/json:
+              type: mainClass[]
+              example: !include examples/collections-by-lcc-number.json
         500:
           body:
             text/plain:

@@ -1,50 +1,21 @@
-import express from 'express';
-import pg, { Client } from 'pg';
+import express, { Application, Request, Response, NextFunction } from 'express';
+import { Client } from 'pg';
+import MainClasses from './main-classes';
+import assessment from './assessment';
 import config from './config';
 
-const app: express.Application = express();
+const app: Application = express();
 
-app.get('/assessment/location-units', (request: express.Request, response: express.Response, next: express.NextFunction) => {
-  request.app.locals.client.query(`SELECT * FROM institutions`)
-    .then((result: pg.QueryResult) => {
-      const institutions: Array<Promise<any>> = [];
+app.locals.client = new Client(config.ldp);
+app.locals.mainClasses = new MainClasses();
 
-      result.rows.forEach((institution: any) => {
-        institutions.push(new Promise((resolve: Function, reject: Function) => {
-          request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId = '${institution.id}'`)
-            .then((result: pg.QueryResult) => {
-              const campuses: Array<Promise<any>> = [];
-
-              result.rows.forEach((campus: any) => {
-                campuses.push(new Promise((resolve: Function, reject: Function) => {
-                  request.app.locals.client.query(`SELECT id, name FROM libraries WHERE campusId = '${campus.id}'`)
-                    .then((result: pg.QueryResult) => {
-                      campus.libraries = result.rows;
-                      resolve(campus);
-                    }).catch((error: Error) => { reject(error); });
-                }));
-              });
-
-              return Promise.all(campuses);
-            }).then((campuses: Array<any>) => {
-              institution.campuses = campuses;
-              resolve(institution);
-            }).catch((error: Error) => { reject(error); })
-        }));
-      });
-
-      return Promise.all(institutions);
-    }).then((institutions: Array<any>) => { response.json(institutions); })
-    .catch((error: Error) => { next(error); });
-});
+app.use('/assessment', assessment);
 
 // Error handler.
-app.use((error: Error, request: express.Request, response: express.Response, next: Function) => {
+app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
   response.sendStatus(500);
   console.error(error.stack);
 });
-
-app.locals.client = new Client(config.pg);
 
 // Connect to the LDP and start listening.
 app.locals.client.connect()
