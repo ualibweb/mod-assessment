@@ -4,7 +4,7 @@
   "description": "a back-end FOLIO module for assessment",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "npm run clean && babel src -x \".js,.ts\" --out-dir dist",
+    "build": "npm run clean && babel src -x \".js,.ts\" --copy-files --out-dir dist",
     "clean": "rimraf dist docs",
     "curl": "curl -w '\\n' -D -",
     "curl-delete": "npm run curl -- -X DELETE",

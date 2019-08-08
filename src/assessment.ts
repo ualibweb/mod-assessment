@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { QueryResult } from 'pg';
+import arrayify from './arrayify';
 
 const assessment = Router();
 
@@ -38,65 +39,92 @@ assessment.get('/location-units', (request: Request, response: Response, next: N
 });
 
 assessment.get('/collections-by-lcc-number', (request: Request, response: Response, next: NextFunction) => {
-  request.app.locals.client.query(`SELECT id FROM libraries`).then((result: QueryResult) => {
-    const queryText: string = `
-      SELECT instances.lccNumber, locations.libraryId, COUNT(*) as volumes
-      FROM items
-      LEFT JOIN holdings ON items.holdingsRecordId = holdings.id
-      LEFT JOIN instances ON holdings.instanceId = instances.id
-      LEFT JOIN locations ON holdings.permanentLocationId = locations.id
-      WHERE lccNumber IS NOT NULL
-      GROUP BY instances.lccNumber, locations.libraryId
-    `;
+  const queryText: string = `
+    SELECT instances.lccNumber, locations.libraryId, COUNT(*) as volumes
+    FROM items
+    LEFT JOIN holdings ON items.holdingsRecordId = holdings.id
+    LEFT JOIN instances ON holdings.instanceId = instances.id
+    LEFT JOIN locations ON holdings.permanentLocationId = locations.id
+    WHERE lccNumber IS NOT NULL
+    GROUP BY instances.lccNumber, locations.libraryId
+  `;
 
-    request.app.locals.client.query(queryText).then((result: QueryResult) => {
-      const lccNumbers: any = {};
+  request.app.locals.client.query(queryText).then((result: QueryResult) => {
+    const libraryCountsByLccNumber: any = {};
 
-      result.rows.forEach((row: any) => {
-        const lccNumber: any = lccNumbers[row.lccNumber];
-        const newValue: any = {
-          libraryId: row.libraryid,
-          volumes: row.volumes
-        };
+    result.rows.forEach((row: any) => {
+      const {
+        lccnumber: lccNumber,
+        libraryid: libraryId,
+        volumes
+      }: any = row;
+      const libraryCounts: any[] = libraryCountsByLccNumber[lccNumber];
+      const newLibraryCount: any = {
+        libraryId,
+        volumes: Number(volumes)
+      };
 
-        if (lccNumber === undefined) lccNumbers[row.lccnumber] = [newValue];
-        else lccNumber.push(newValue);
-      });
-
-      const mainClasses: any = request.app.locals.mainClasses;
-
-      Object.entries(lccNumbers).forEach(([lccNumber, value]: Array<any>) => {
-        const counts: any = mainClasses[lccNumber.charAt(0)].counts;
-
-        // Count.
-        value.forEach(({libraryId, volumes}: any) => {
-          const library: any = counts[libraryId];
-          const numberifiedVolumes = Number(volumes);
-
-          if (library === undefined) counts[libraryId] = {
-            titles: 1,
-            volumes: numberifiedVolumes
-          };
-          else {
-            ++library.titles;
-            library.volumes += numberifiedVolumes
-          }
-        });
-      });
-
-      // Arrayify the main classes and sort them alphabetically by letter.
-      const arrayifiedMainClasses: Array<any> = Object.entries(mainClasses).map(([letter, value]: Array<any>) => ({
-        letter,
-        ...value
-      })).sort((mainClass1: any, mainClass2: any) => {
-        const letter1: string = mainClass1.letter;
-        const letter2: string = mainClass2.letter;
-        return letter1 < letter2 ? -1 : letter1 > letter2 ? 1 : 0;
-      });
-
-      response.json(arrayifiedMainClasses);
-      mainClasses.clearCounts();
+      if (libraryCounts === undefined) libraryCountsByLccNumber[lccNumber] = [newLibraryCount];
+      else libraryCounts.push(newLibraryCount);
     });
+
+    let mainClasses: any = request.app.locals.mainClasses;
+
+    Object.entries(libraryCountsByLccNumber).forEach(([lccNumber, libraryCounts]: any[]) => {
+      let leadingUppercaseLetters: string = '';
+
+      // Get the leading uppercase letters.
+      for (let i: number = 0; i < lccNumber.length; ++i) {
+        const char: string = lccNumber.charAt(i);
+        const charCode: number = lccNumber.charCodeAt(i);
+
+        if (charCode >= 65 && charCode <= 90) leadingUppercaseLetters += char;
+        else break;
+      }
+
+      const mainClass: any = mainClasses[leadingUppercaseLetters.charAt(0)];
+      const subclass: any = mainClass.subclasses[leadingUppercaseLetters];
+
+      // Count.
+      libraryCounts.forEach(({libraryId, volumes}: any) => {
+        if (subclass !== undefined) {
+          if (subclass.counts[libraryId] === undefined) {
+            subclass.counts[libraryId] = {
+              titles: 0,
+              volumes: 0
+            };
+          }
+
+          ++subclass.counts[libraryId].titles;
+          subclass.counts[libraryId].volumes += volumes;
+        }
+
+        if (mainClass.counts[libraryId] === undefined) {
+          mainClass.counts[libraryId] = {
+            titles: 0,
+            volumes: 0
+          };
+        }
+
+        ++mainClass.counts[libraryId].titles;
+        mainClass.counts[libraryId].volumes += volumes;
+      });
+    });
+
+    // Arrayify the main classes.
+    mainClasses = arrayify(mainClasses, 'letter');
+
+    // Arrayify the subclasses.
+    mainClasses.forEach((mainClass: any) => {
+      const subclasses: any = mainClass.subclasses;
+
+      if (subclasses !== undefined) {
+        mainClass.subclasses = arrayify(subclasses, 'letters');
+      }
+    });
+
+    response.json(mainClasses);
+    request.app.locals.mainClasses.clearCounts();
   });
 });
 

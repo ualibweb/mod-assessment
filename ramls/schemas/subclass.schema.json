@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Subclass",
+  "description": "A subclass in the Library of Congress Classification, with counts",
+  "type": "object",
+  "properties": {
+    "letters": {
+      "description": "The letters that designate the subclass",
+      "type": "string"
+    },
+    "caption": {
+      "description": "The caption that describes the sublass",
+      "type": "string"
+    },
+    "counts": {
+      "description": "The counts of the titles and volumes in the main class, broken down by library",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "required": [ "letters", "caption", "counts" ]
+}

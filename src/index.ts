@@ -1,13 +1,13 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import { Client } from 'pg';
-import MainClasses from './main-classes';
+import mainClasses from './main-classes';
 import assessment from './assessment';
 import config from './config';
 
 const app: Application = express();
 
 app.locals.client = new Client(config.ldp);
-app.locals.mainClasses = new MainClasses();
+app.locals.mainClasses = mainClasses;
 
 app.use('/assessment', assessment);
 

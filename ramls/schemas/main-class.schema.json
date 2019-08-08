@@ -12,11 +12,19 @@
       "description": "The caption that describes the main class",
       "type": "string"
     },
+    "subclasses": {
+      "description": "The subclasses of the main class",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "subclass.schema.json"
+      }
+    },
     "counts": {
       "description": "The counts of the titles and volumes in the main class, broken down by library",
       "type": "object"
     }
   },
   "additionalProperties": false,
-  "required": [ "letter", "caption", "counts" ]
+  "required": [ "letter", "caption", "subclasses", "counts" ]
 }
