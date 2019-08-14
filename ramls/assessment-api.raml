@@ -6,6 +6,7 @@ version: v1
 types:
   institution: !include schemas/institution.schema.json
   mainClass: !include schemas/main-class.schema.json
+  materialType: !include schemas/material-type.schema.json
 
 /assessment:
   /location-units:
@@ -32,6 +33,20 @@ types:
             application/json:
               type: mainClass[]
               example: !include examples/collections-by-lcc-number.json
+        500:
+          body:
+            text/plain:
+              example: Internal Server Error
+  /collections-by-material-type:
+    description: Collection of material types, with counts
+    get:
+      description: Get a list of material types, with counts
+      responses:
+        200:
+          body:
+            application/json:
+              type: materialType[]
+              example: !include examples/collections-by-material-type.json
         500:
           body:
             text/plain:

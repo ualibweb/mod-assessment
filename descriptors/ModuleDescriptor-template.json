@@ -13,6 +13,10 @@
         {
           "methods": ["GET"],
           "pathPattern": "/assessment/collections-by-lcc-number"
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/assessment/collections-by-material-type"
         }
       ]
     }
