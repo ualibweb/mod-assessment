@@ -1,93 +1,101 @@
 import { Request, Response, NextFunction } from 'express';
-import { QueryResult } from 'pg';
+import { Client, QueryResult } from 'pg';
 import arrayify from './arrayify';
 
 export default function(request: Request, response: Response, next: NextFunction) {
-  const queryText: string = `
-    SELECT instances.lccNumber, locations.libraryId, COUNT(*) as volumes
-    FROM items
-    LEFT JOIN holdings ON items.holdingsRecordId = holdings.id
-    LEFT JOIN instances ON holdings.instanceId = instances.id
-    LEFT JOIN locations ON holdings.permanentLocationId = locations.id
-    WHERE lccNumber IS NOT NULL
-    GROUP BY instances.lccNumber, locations.libraryId
-  `;
+  const client: Client = request.app.locals.client;
+  const queries: Promise<QueryResult>[] = [
+    client.query("SELECT id from classification_types WHERE name = 'LC'"),
+    client.query(`
+      SELECT instances.data -> 'classifications' as classifications, aggregated_instances.library_ids, aggregated_instances.volumes
+      FROM (
+        SELECT id, ARRAY_AGG(library_id) AS library_ids, ARRAY_AGG(volumes) as volumes
+        FROM (
+          SELECT instances.id, locations.library_id, count(items.id) as volumes
+          FROM items
+          LEFT JOIN holdings ON items.holdings_record_id = holdings.id
+          LEFT JOIN instances ON holdings.instance_id = instances.id
+          LEFT JOIN locations ON holdings.permanent_location_id = locations.id
+          GROUP BY instances.id, locations.library_id
+        ) AS instance_library_combinations
+        GROUP BY id
+      ) AS aggregated_instances
+      LEFT JOIN instances on aggregated_instances.id = instances.id
+    `)
+  ];
 
-  request.app.locals.client.query(queryText).then((result: QueryResult) => {
-    const libraryCountsByLccNumber: any = {};
+  Promise.all(queries)
+    .then((results: QueryResult[]) => {
+      const lccId: string = results[0].rows[0].id;
+      let mainClasses: any = request.app.locals.mainClasses;
 
-    result.rows.forEach((row: any) => {
-      const {
-        lccnumber: lccNumber,
-        libraryid: libraryId,
-        volumes
-      }: any = row;
-      const libraryCounts: any[] = libraryCountsByLccNumber[lccNumber];
-      const newLibraryCount: any = {
-        libraryId,
-        volumes: Number(volumes)
-      };
+      results[1].rows.forEach((row: any) => {
+        const {
+          classifications,
+          library_ids: libraryIds,
+          volumes
+        }: any = row;
+        const numerifiedVolumes: number = Number(volumes);
 
-      if (libraryCounts === undefined) libraryCountsByLccNumber[lccNumber] = [newLibraryCount];
-      else libraryCounts.push(newLibraryCount);
-    });
+        for (let i: number = 0; i < classifications.length; ++i) {
+          const classification: any = classifications[i];
 
-    let mainClasses: any = request.app.locals.mainClasses;
+          if (classification.classificationTypeId === lccId) {
+            const lccNumber: string = classification.classificationNumber;
+            let leadingUppercaseLetters: string = '';
 
-    Object.entries(libraryCountsByLccNumber).forEach(([lccNumber, libraryCounts]: any[]) => {
-      let leadingUppercaseLetters: string = '';
+            for (let j: number = 0; j < lccNumber.length; ++j) {
+              const char: string = lccNumber.charAt(j);
+              const charCode: number = lccNumber.charCodeAt(j);
 
-      // Get the leading uppercase letters.
-      for (let i: number = 0; i < lccNumber.length; ++i) {
-        const char: string = lccNumber.charAt(i);
-        const charCode: number = lccNumber.charCodeAt(i);
+              if (charCode >= 65 && charCode <= 90) {
+                leadingUppercaseLetters += char;
+              } else break;
+            }
 
-        if (charCode >= 65 && charCode <= 90) leadingUppercaseLetters += char;
-        else break;
-      }
+            const mainClass: any = mainClasses[leadingUppercaseLetters.charAt(0)];
+            const subclass: any = mainClass.subclasses[leadingUppercaseLetters];
 
-      const mainClass: any = mainClasses[leadingUppercaseLetters.charAt(0)];
-      const subclass: any = mainClass.subclasses[leadingUppercaseLetters];
+            for (let j: number = 0; j < row.library_ids.length; ++j) {
+              const libraryId: string = libraryIds[j];
 
-      // Count.
-      libraryCounts.forEach(({libraryId, volumes}: any) => {
-        if (subclass !== undefined) {
-          if (subclass.counts[libraryId] === undefined) {
-            subclass.counts[libraryId] = {
-              titles: 0,
-              volumes: 0
-            };
+              if (subclass !== undefined) {
+                if (subclass.counts[libraryId] === undefined) {
+                  subclass.counts[libraryId] = {
+                    titles: 0,
+                    volumes: 0
+                  };
+                }
+
+                ++subclass.counts[libraryId].titles;
+                subclass.counts[libraryId].volumes += numerifiedVolumes;
+              }
+
+              if (mainClass.counts[row.library_id] === undefined) {
+                mainClass.counts[row.library_id] = {
+                  titles: 0,
+                  volumes: 0
+                };
+              }
+
+              ++mainClass.counts[row.library_id].titles;
+              mainClass.counts[row.library_id].volumes += numerifiedVolumes;
+            }
+
+            break;
           }
-
-          ++subclass.counts[libraryId].titles;
-          subclass.counts[libraryId].volumes += volumes;
         }
-
-        if (mainClass.counts[libraryId] === undefined) {
-          mainClass.counts[libraryId] = {
-            titles: 0,
-            volumes: 0
-          };
-        }
-
-        ++mainClass.counts[libraryId].titles;
-        mainClass.counts[libraryId].volumes += volumes;
       });
+
+      mainClasses = arrayify(mainClasses, 'letter');
+      mainClasses.forEach((mainClass: any) => {
+        mainClass.subclasses = arrayify(mainClass.subclasses, 'letters');
+      });
+
+      response.json(mainClasses);
+      request.app.locals.mainClasses.clearCounts();
+    })
+    .catch((error: Error) => {
+      next(error);
     });
-
-    // Arrayify the main classes.
-    mainClasses = arrayify(mainClasses, 'letter');
-
-    // Arrayify the subclasses.
-    mainClasses.forEach((mainClass: any) => {
-      const subclasses: any = mainClass.subclasses;
-
-      if (subclasses !== undefined) {
-        mainClass.subclasses = arrayify(subclasses, 'letters');
-      }
-    });
-
-    response.json(mainClasses);
-    request.app.locals.mainClasses.clearCounts();
-  });
 };

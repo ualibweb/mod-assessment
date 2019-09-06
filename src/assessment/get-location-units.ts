@@ -1,36 +1,50 @@
 import { Request, Response, NextFunction } from 'express';
-import { QueryResult } from 'pg';
+import { Client, QueryResult } from 'pg';
 
 export default function(request: Request, response: Response, next: NextFunction) {
-  request.app.locals.client.query(`SELECT * FROM institutions`)
+  const client: Client = request.app.locals.client;
+
+  client.query(`SELECT * FROM institutions`)
     .then((result: QueryResult) => {
-      const institutions: Array<Promise<any>> = [];
+      const institutionPromises: Promise<any>[] = [];
 
       result.rows.forEach((institution: any) => {
-        institutions.push(new Promise((resolve: Function, reject: Function) => {
-          request.app.locals.client.query(`SELECT id, name FROM campuses WHERE institutionId = '${institution.id}'`)
+        institutionPromises.push(new Promise((resolve: Function, reject: Function) => {
+          client.query(`SELECT id, name FROM campuses WHERE institution_id = '${institution.id}'`)
             .then((result: QueryResult) => {
-              const campuses: Array<Promise<any>> = [];
+              const campusPromises: Promise<any>[] = [];
 
               result.rows.forEach((campus: any) => {
-                campuses.push(new Promise((resolve: Function, reject: Function) => {
-                  request.app.locals.client.query(`SELECT id, name FROM libraries WHERE campusId = '${campus.id}'`)
+                campusPromises.push(new Promise((resolve: Function, reject: Function) => {
+                  client.query(`SELECT id, name FROM libraries WHERE campus_id = '${campus.id}'`)
                     .then((result: QueryResult) => {
                       campus.libraries = result.rows;
                       resolve(campus);
-                    }).catch((error: Error) => { reject(error); });
+                    })
+                    .catch((error: Error) => {
+                      reject(error);
+                    });
                 }));
               });
 
-              return Promise.all(campuses);
-            }).then((campuses: Array<any>) => {
+              return Promise.all(campusPromises);
+            })
+            .then((campuses: Array<any>) => {
               institution.campuses = campuses;
               resolve(institution);
-            }).catch((error: Error) => { reject(error); })
+            })
+            .catch((error: Error) => {
+              reject(error);
+            });
         }));
       });
 
-      return Promise.all(institutions);
-    }).then((institutions: Array<any>) => { response.json(institutions); })
-    .catch((error: Error) => { next(error); });
+      return Promise.all(institutionPromises);
+    })
+    .then((institutions: any[]) => {
+      response.json(institutions);
+    })
+    .catch((error: Error) => {
+      next(error);
+    });
 };
