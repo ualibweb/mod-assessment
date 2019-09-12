@@ -35,8 +35,8 @@ export default function(request: Request, response: Response, next: NextFunction
 
         for (let i = 0; i < libraryIds.length; ++i) {
           materialTypes[materialType].counts[libraryIds[i]] = {
-            titles: titles[i],
-            volumes: volumes[i]
+            titles: Number(titles[i]),
+            volumes: Number(volumes[i])
           };
         }
       });
