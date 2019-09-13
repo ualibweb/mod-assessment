@@ -1,0 +1,20 @@
+[
+  {
+    "name": "book",
+    "counts": {
+      "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+        "checkouts": 4,
+        "renewals": 1
+      }
+    }
+  },
+  {
+    "name": "dvd",
+    "counts": {
+      "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+        "checkouts": 1,
+        "renewals": 0
+      }
+    }
+  }
+]
