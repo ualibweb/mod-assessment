@@ -71,15 +71,15 @@ export default function(request: Request, response: Response, next: NextFunction
                 subclass.counts[libraryId].volumes += numerifiedVolumes;
               }
 
-              if (mainClass.counts[row.library_id] === undefined) {
-                mainClass.counts[row.library_id] = {
+              if (mainClass.counts[libraryId] === undefined) {
+                mainClass.counts[libraryId] = {
                   titles: 0,
                   volumes: 0
                 };
               }
 
-              ++mainClass.counts[row.library_id].titles;
-              mainClass.counts[row.library_id].volumes += numerifiedVolumes;
+              ++mainClass.counts[libraryId].titles;
+              mainClass.counts[libraryId].volumes += numerifiedVolumes;
             }
 
             break;
