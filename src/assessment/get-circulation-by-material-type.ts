@@ -6,6 +6,7 @@ import arrayify from './arrayify';
 export default function(request: Request, response: Response, next: NextFunction) {
   const dateFormat: string = 'YYYY-MM-DD';
   const {from, to}: any = request.query;
+
   let responseText: string;
 
   if (!from || !to) {

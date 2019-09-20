@@ -17,6 +17,14 @@
         {
           "methods": ["GET"],
           "pathPattern": "/assessment/collections-by-material-type"
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/assessment/circulation-by-lcc-number"
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/assessment/circulation-by-material-type"
         }
       ]
     }

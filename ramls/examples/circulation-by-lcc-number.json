@@ -1,0 +1,29 @@
+[
+  {
+    "letter": "P",
+    "caption": "Language and Literature",
+    "subclasses": [
+      {
+        "letters": "P",
+        "caption": "Philology. Linguistics",
+        "counts": {}
+      },
+      {
+        "letters": "PR",
+        "caption": "English literature",
+        "counts": {
+          "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+            "checkouts": 1,
+            "renewals": 0
+          }
+        }
+      }
+    ],
+    "counts": {
+      "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+        "checkouts": 1,
+        "renewals": 0
+      }
+    }
+  }
+]

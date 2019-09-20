@@ -51,6 +51,37 @@ types:
           body:
             text/plain:
               example: Internal Server Error
+  /circulation-by-lcc-number:
+    description: Collection of nested classifications, with collections counts
+    get:
+      description: Get a list of nested classifications, with collections counts
+      queryParameters:
+        from:
+          displayName: From
+          type: date-only
+          description: The lower bound of the date range
+          example: 2010-01-01
+          required: true
+        to:
+          displayName: To
+          type: date-only
+          description: The upper bound of the date range
+          example: 2019-12-31
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              type: mainClass[]
+              example: !include examples/circulation-by-lcc-number.json
+        400:
+          body:
+            text/plain:
+              example: Missing query parameter(s)
+        500:
+          body:
+            text/plain:
+              example: Internal Server Error
   /circulation-by-material-type:
     description: Collection of material types, with circulation counts
     get:
@@ -68,7 +99,6 @@ types:
           description: The upper bound of the date range
           example: 2019-12-31
           required: true
-
       responses:
         200:
           body:
