@@ -1,0 +1,20 @@
+[
+  {
+    "name": "faculty",
+    "counts": {
+      "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+        "checkouts": 2,
+        "renewals": 0
+      }
+    }
+  },
+  {
+    "name": "graduate",
+    "counts": {
+      "5d78803e-ca04-4b4a-aeae-2c63b924518b": {
+        "checkouts": 2,
+        "renewals": 1
+      }
+    }
+  }
+]

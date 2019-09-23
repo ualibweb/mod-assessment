@@ -7,6 +7,7 @@ types:
   institution: !include schemas/institution.schema.json
   mainClass: !include schemas/main-class.schema.json
   materialType: !include schemas/material-type.schema.json
+  patronGroup: !include schemas/patron-group.schema.json
 
 /assessment:
   /location-units:
@@ -105,6 +106,37 @@ types:
             application/json:
               type: materialType[]
               example: !include examples/circulation-by-material-type.json
+        400:
+          body:
+            text/plain:
+              example: Missing query parameter(s)
+        500:
+          body:
+            text/plain:
+              example: Internal Server Error
+  /circulation-by-patron-group:
+    description: Collection of patron groups, with circulation counts
+    get:
+      description: Get a list of patron groups, with circulation counts
+      queryParameters:
+        from:
+          displayName: From
+          type: date-only
+          description: The lower bound on the date range
+          example: 2010-01-01
+          required: true
+        to:
+          displayName: To
+          type: date-only
+          description: The upper bound of the date range
+          example: 2019-12-31
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              type: patronGroup[]
+              example: !include examples/circulation-by-patron-group.json
         400:
           body:
             text/plain:

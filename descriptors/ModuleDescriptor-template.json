@@ -25,6 +25,10 @@
         {
           "methods": ["GET"],
           "pathPattern": "/assessment/circulation-by-material-type"
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/assessment/circulation-by-patron-group"
         }
       ]
     }
