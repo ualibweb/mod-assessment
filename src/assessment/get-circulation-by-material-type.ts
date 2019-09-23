@@ -30,7 +30,6 @@ export default function(request: Request, response: Response, next: NextFunction
         FROM loans
         LEFT JOIN items ON loans.item_id = items.id
         LEFT JOIN holdings ON items.holdings_record_id = holdings.id
-        LEFT JOIN instances ON holdings.instance_id = instances.id
         LEFT JOIN material_types ON items.data ->> 'materialTypeId' = material_types.id
         LEFT JOIN locations ON holdings.permanent_location_id = locations.id
         WHERE loans.loan_date >= '${from}' AND loans.loan_date <= '${to}'
