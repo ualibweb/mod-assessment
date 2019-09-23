@@ -13,7 +13,7 @@
       "type": "string"
     },
     "counts": {
-      "description": "The counts of the titles and volumes in the main class, broken down by library",
+      "description": "The counts, broken down by library",
       "type": "object"
     }
   },

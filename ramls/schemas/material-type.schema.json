@@ -9,7 +9,7 @@
       "type": "string"
     },
     "counts": {
-      "description": "The counts of the titles and volumes of the material type, broken down by library",
+      "description": "The counts, broken down by library",
       "type": "object"
     }
   },
